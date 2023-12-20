@@ -52,6 +52,19 @@ class TestHBNBCommand(unittest.TestCase):
             # creating a model with non-null attribute(s)
             with self.assertRaises(sqlalchemy.exc.IntegrityError):
                 cons.onecmd('create User')
+            # fetch all users and count
+            dbc = MySQLdb.connect(
+                host=os.getenv('HBNB_MYSQL_HOST'),
+                port=3306,
+                user=os.getenv('HBNB_MYSQL_USER'),
+                passwd=os.getenv('HBNB_MYSQL_PWD'),
+                db=os.getenv('HBNB_MYSQL_DB')
+            )
+            cursor = dbc.cursor()
+            cursor.execute('SELECT * FROM users;')
+            prev_count = len(cursor.fetchall())
+            cursor.close()
+            dbc.close()
             # creating a User instance
             clear_stream(cout)
             cons.onecmd('create User email="john25@gmail.com" password="123"')
@@ -64,6 +77,10 @@ class TestHBNBCommand(unittest.TestCase):
                 db=os.getenv('HBNB_MYSQL_DB')
             )
             cursor = dbc.cursor()
+            # fetch all users and count
+            cursor.execute('SELECT * FROM users;')
+            curr_count = len(cursor.fetchall())
+            self.assertEqual(curr_count, prev_count + 1)
             cursor.execute('SELECT * FROM users WHERE id="{}"'.format(mdl_id))
             result = cursor.fetchone()
             self.assertTrue(result is not None)
