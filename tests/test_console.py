@@ -8,6 +8,7 @@ import sqlalchemy
 import unittest
 from io import StringIO
 from unittest.mock import patch
+import pep8
 
 from console import HBNBCommand
 from models import storage
@@ -162,3 +163,9 @@ class TestHBNBCommand(unittest.TestCase):
             cons.onecmd('count State')
             cursor.close()
             dbc.close()
+
+    def test_pep8_console(self):
+        """Pep8 console.py"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(["console.py"])
+        self.assertEqual(p.total_errors, 0, 'fix Pep8')
