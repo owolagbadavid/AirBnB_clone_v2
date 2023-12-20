@@ -9,7 +9,7 @@ import unittest
 from io import StringIO
 from unittest.mock import patch
 import pep8
-
+import console
 from console import HBNBCommand
 from models import storage
 from models.base_model import BaseModel
@@ -169,3 +169,27 @@ class TestHBNBCommand(unittest.TestCase):
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(["console.py"])
         self.assertEqual(p.total_errors, 0, 'fix Pep8')
+
+    def test_docstrings_in_console(self):
+        """checking for docstrings"""
+        self.assertIsNotNone(console.__doc__)
+        self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_quit.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_EOF.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_create.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_show.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_destroy.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_all.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_update.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_count.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_all.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_create.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_show.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_destroy.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_update.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_count.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_quit.__doc__)
+        self.assertIsNotNone(HBNBCommand.help_EOF.__doc__)
+        self.assertIsNotNone(HBNBCommand.precmd.__doc__)
+        self.assertIsNotNone(HBNBCommand.postcmd.__doc__)
+        self.assertIsNotNone(HBNBCommand.default.__doc__)
