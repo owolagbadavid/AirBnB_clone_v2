@@ -18,10 +18,11 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
+        self.updated_at = datetime.now()
+
         if not kwargs:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
         else:
             for key, value in kwargs.items():
                 if key != '__class__':
@@ -34,8 +35,6 @@ class BaseModel:
                 setattr(self, 'id', str(uuid.uuid4()))
             if not hasattr(kwargs, 'created_at'):
                 setattr(self, 'created_at', datetime.now())
-            if not hasattr(kwargs, 'updated_at'):
-                setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
         """Returns a string representation of the instance"""
