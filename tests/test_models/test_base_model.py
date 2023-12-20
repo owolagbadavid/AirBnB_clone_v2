@@ -110,21 +110,23 @@ class TestBasemodel(unittest.TestCase):
         }
         self.assertDictEqual(mdl.to_dict(), to_dict)
         if os.getenv('HBNB_TYPE_STORAGE') != 'db':
-            self.assertDictEqual(
-                self.value(id='u-b34', age=13).to_dict(),
+            result = self.value(id='u-b34', age=13).to_dict()
+            self.assertEqual(
+                result | 
                 {
                     '__class__': mdl.__class__.__name__,
                     'id': 'u-b34',
                     'age': 13
-                }
+                } , result
             )
-            self.assertDictEqual(
-                self.value(id='u-b34', age=None).to_dict(),
+            result = self.value(id='u-b34', age=None).to_dict()
+            self.assertEqual(
+                result |
                 {
                     '__class__': mdl.__class__.__name__,
                     'id': 'u-b34',
                     'age': None
-                }
+                }, result
             )
         # Tests to_dict output contradiction
         mdl_d = self.value()

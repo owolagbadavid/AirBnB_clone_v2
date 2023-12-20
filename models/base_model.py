@@ -31,9 +31,9 @@ class BaseModel:
                     else:
                         setattr(self, key, value)
             # if os.getenv('HBNB_TYPE_STORAGE') in ('db'):
-            if not hasattr(kwargs, 'id'):
+            if 'id' not in kwargs:
                 setattr(self, 'id', str(uuid.uuid4()))
-            if not hasattr(kwargs, 'created_at'):
+            if 'created_at' not in kwargs:
                 setattr(self, 'created_at', datetime.now())
 
     def __str__(self):
