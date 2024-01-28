@@ -33,6 +33,7 @@ def python_page(text="is_cool"):
     '''The python page.'''
     return 'Python {}'.format(text.replace('_', ' '))
 
+
 @app.route('/number/<int:n>')
 def number_page(n):
     '''The number page.'''
